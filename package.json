@@ -1,16 +1,21 @@
 {
   "name": "dnd-health",
-  "version": "1.0.0",
   "description": "Scrape and display the party's health stats.",
+  "license": "ISC",
+  "version": "1.0.0",
   "main": "script.js",
   "scripts": {
-    "format": "prettier script.js --write",
+    "format": "prettier-package-json --write ./package.json && prettier script.js --write",
     "start": "node script.js"
   },
   "dependencies": {
     "puppeteer": "^8.0.0"
   },
   "devDependencies": {
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "prettier-package-json": "^2.1.3"
+  },
+  "engines": {
+    "node": ">= 7.6"
   }
 }
