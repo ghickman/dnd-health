@@ -2,6 +2,7 @@
   "name": "dnd-health",
   "description": "Scrape and display the party's health stats.",
   "license": "ISC",
+  "repository": "github:ghickman/dnd-health",
   "version": "1.0.0",
   "main": "script.js",
   "scripts": {
