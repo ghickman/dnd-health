@@ -37,11 +37,7 @@ const getHP = async (browser, player) => {
   const browser = await puppeteer.launch()
 
   // get the HP from each Player's sheet
-  const results = await Promise.all(
-    players.map((p) => {
-      return getHP(browser, p)
-    })
-  )
+  const results = await Promise.all(players.map((p) => getHP(browser, p)))
 
   // write out name and hp, padded so the colons line up, obvs
   results.forEach((player) => {
