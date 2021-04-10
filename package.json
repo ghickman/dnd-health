@@ -4,9 +4,13 @@
   "description": "Scrape and display the party's health stats.",
   "main": "script.js",
   "scripts": {
+    "format": "prettier script.js --write",
     "start": "node script.js"
   },
   "dependencies": {
     "puppeteer": "^8.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
   }
 }
