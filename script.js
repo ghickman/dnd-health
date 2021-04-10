@@ -1,3 +1,4 @@
+const chalk = require('chalk')
 const puppeteer = require('puppeteer')
 
 const players = [
@@ -42,11 +43,11 @@ const getHP = async (browser, player) => {
   // write out name and hp, padded so the colons line up, obvs
   results.forEach((player) => {
     const name = player.name.padStart(8, ' ')
-
     const current = player.max.padStart(3, ' ')
     const max = player.max.padEnd(3, ' ')
 
-    console.log(`${name}: ${current}/${max} (${player.half})`)
+    const message = chalk`${name}: {green.bold ${current}}/{green ${max}} ({cyan ${player.half}})`
+    console.log(message)
   })
 
   await browser.close()
