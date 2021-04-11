@@ -6,7 +6,7 @@
   "version": "1.0.0",
   "main": "script.js",
   "scripts": {
-    "format": "prettier-package-json --write ./package.json && prettier script.js --write",
+    "format": "prettier-package-json --write ./package.json && prettier . --write",
     "start": "node script.js"
   },
   "dependencies": {
