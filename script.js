@@ -17,6 +17,8 @@ const getHP = async (browser, player) => {
   await page.goto(player.url)
 
   // wait for the current health element to be visible
+  // note we're selecting for the mobile view, which is what shows up at the puppeteer default
+  // viewport; we could resize this if required.
   await page.waitForSelector('.ct-status-summary-mobile__hp-current', {
     visible: true,
   })
@@ -38,6 +40,7 @@ const getHP = async (browser, player) => {
   const browser = await puppeteer.launch()
 
   // get the HP from each Player's sheet
+  console.log(chalk`{grey Fetching data from dndbeyond.com...}`)
   const results = await Promise.all(players.map((p) => getHP(browser, p)))
 
   // write out name and hp, padded so the colons line up, obvs
