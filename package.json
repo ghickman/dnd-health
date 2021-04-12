@@ -1,14 +1,23 @@
 {
-  "name": "g",
+  "name": "dnd-health",
+  "description": "Scrape and display the party's health stats.",
+  "license": "ISC",
+  "repository": "github:ghickman/dnd-health",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "script.js",
   "scripts": {
+    "format": "prettier-package-json --write ./package.json && prettier . --write",
     "start": "node script.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+    "chalk": "^4.1.0",
     "puppeteer": "^8.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "prettier-package-json": "^2.1.3"
+  },
+  "engines": {
+    "node": ">=10.18.1"
   }
 }
