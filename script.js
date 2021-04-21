@@ -49,7 +49,16 @@ const getHP = async (browser, player) => {
     const current = player.max.padStart(3, ' ')
     const max = player.max.padEnd(3, ' ')
 
-    const message = chalk`${name}: {green.bold ${current}}/{green ${max}} ({cyan ${player.half}})`
+    // Change current HP as it decreases
+    let current_colour = chalk.green
+    if (player.current < player.max && player.current > player.half) {
+      current_colour = chalk.magenta
+    }
+    if (player.current < player.half) {
+      current_colour = chalk.red.bold
+    }
+
+    const message = `${name}: ${current_colour(current)}/${chalk.green(max)} (${chalk.cyan(player.half)})`
     console.log(message)
   })
 
