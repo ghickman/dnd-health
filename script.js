@@ -25,13 +25,13 @@ const getHP = async (browser, player) => {
 
   const current = await page.$eval(
     '.ct-status-summary-mobile__hp-current',
-    (el) => el.innerText
+    (el) => parseInt(el.innerText)
   )
   const max = await page.$eval(
     '.ct-status-summary-mobile__hp-max',
-    (el) => el.innerText
+    (el) => parseInt(el.innerText)
   )
-  const half = Math.floor(parseInt(max) / 2)
+  const half = Math.floor(max / 2)
 
   return { ...player, current, max, half }
 }
@@ -46,8 +46,8 @@ const getHP = async (browser, player) => {
   // write out name and hp, padded so the colons line up, obvs
   results.forEach((player) => {
     const name = player.name.padStart(8, ' ')
-    const current = player.max.padStart(3, ' ')
-    const max = player.max.padEnd(3, ' ')
+    const current = String(player.current).padStart(3, ' ')
+    const max = String(player.max).padEnd(3, ' ')
 
     // Change current HP as it decreases
     let current_colour = chalk.green
