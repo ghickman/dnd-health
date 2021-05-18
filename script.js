@@ -14,7 +14,7 @@ const getHP = async (browser, player) => {
   const page = await browser.newPage()
 
   // Get the page for the given player
-  await page.goto(player.url)
+  await page.goto(player.url, {timeout: 0})
 
   // wait for the current health element to be visible
   // note we're selecting for the mobile view, which is what shows up at the puppeteer default
