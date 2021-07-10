@@ -23,12 +23,19 @@ const getHP = async (browser, cookie, player) => {
   // Get the page for the given player
   await page.goto(player.url, {timeout: 0})
 
-  // wait for the current health element to be visible
-  // note we're selecting for the mobile view, which is what shows up at the puppeteer default
-  // viewport; we could resize this if required.
-  await page.waitForSelector('.ct-status-summary-mobile__hp-current', {
-    visible: true,
-  })
+  // The current health element is missing if the character is down or
+  // something has changed with the site.
+  try {
+    // Wait for the current health element to be visible.  We're selecting for
+    // the mobile view, which is what shows up at the puppeteer default
+    // viewport.
+    await page.waitForSelector('.ct-status-summary-mobile__hp-current', {
+      timeout: 5000,
+      visible: true,
+    })
+  } catch (TimeoutError) {
+    return { ...player, current: "-", max: "-", half: "-" }
+  }
 
   const current = await page.$eval(
     '.ct-status-summary-mobile__hp-current',
