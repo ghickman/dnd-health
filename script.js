@@ -10,8 +10,15 @@ const players = [
   { name: 'Searos', url: 'https://www.dndbeyond.com/characters/37246059' },
 ]
 
-const getHP = async (browser, player) => {
+const getHP = async (browser, cookie, player) => {
   const page = await browser.newPage()
+  await page.setCookie({
+    name: "CobaltSession",
+    value: cookie,
+    domain: ".dndbeyond.com",
+    httpOnly: true,
+    secure: true,
+  })
 
   // Get the page for the given player
   await page.goto(player.url, {timeout: 0})
@@ -37,11 +44,17 @@ const getHP = async (browser, player) => {
 }
 
 ;(async () => {
+  if (process.argv.length < 3) {
+    console.log(chalk`{red Session cookie for dndbeyond.com missing}`)
+    process.exit(1)
+  }
+  const cookie = process.argv.pop()
+
   const browser = await puppeteer.launch()
 
   // get the HP from each Player's sheet
   console.log(chalk`{grey Fetching data from dndbeyond.com...}`)
-  const results = await Promise.all(players.map((p) => getHP(browser, p)))
+  const results = await Promise.all(players.map((p) => getHP(browser, cookie, p)))
 
   // write out name and hp, padded so the colons line up, obvs
   results.forEach((player) => {
