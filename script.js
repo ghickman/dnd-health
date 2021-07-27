@@ -74,7 +74,7 @@ const getHP = async (browser, cookie, player) => {
     if (player.current < player.max && player.current > player.half) {
       current_colour = chalk.magenta
     }
-    if (player.current < player.half) {
+    if (player.current <= player.half) {
       current_colour = chalk.red.bold
     }
 
