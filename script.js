@@ -13,15 +13,15 @@ const players = [
 const getHP = async (browser, cookie, player) => {
   const page = await browser.newPage()
   await page.setCookie({
-    name: "CobaltSession",
+    name: 'CobaltSession',
     value: cookie,
-    domain: ".dndbeyond.com",
+    domain: '.dndbeyond.com',
     httpOnly: true,
     secure: true,
   })
 
   // Get the page for the given player
-  await page.goto(player.url, {timeout: 0})
+  await page.goto(player.url, { timeout: 0 })
 
   // The current health element is missing if the character is down or
   // something has changed with the site.
@@ -34,16 +34,15 @@ const getHP = async (browser, cookie, player) => {
       visible: true,
     })
   } catch (TimeoutError) {
-    return { ...player, current: "-", max: "-", half: "-" }
+    return { ...player, current: '-', max: '-', half: '-' }
   }
 
   const current = await page.$eval(
     '.ct-status-summary-mobile__hp-current',
     (el) => parseInt(el.innerText)
   )
-  const max = await page.$eval(
-    '.ct-status-summary-mobile__hp-max',
-    (el) => parseInt(el.innerText)
+  const max = await page.$eval('.ct-status-summary-mobile__hp-max', (el) =>
+    parseInt(el.innerText)
   )
   const half = Math.floor(max / 2)
 
@@ -61,7 +60,9 @@ const getHP = async (browser, cookie, player) => {
 
   // get the HP from each Player's sheet
   console.log(chalk`{grey Fetching data from dndbeyond.com...}`)
-  const results = await Promise.all(players.map((p) => getHP(browser, cookie, p)))
+  const results = await Promise.all(
+    players.map((p) => getHP(browser, cookie, p))
+  )
 
   // write out name and hp, padded so the colons line up, obvs
   results.forEach((player) => {
@@ -78,7 +79,9 @@ const getHP = async (browser, cookie, player) => {
       current_colour = chalk.red.bold
     }
 
-    const message = `${name}: ${current_colour(current)}/${chalk.green(max)} (${chalk.cyan(player.half)})`
+    const message = `${name}: ${current_colour(current)}/${chalk.green(
+      max
+    )} (${chalk.cyan(player.half)})`
     console.log(message)
   })
 
