@@ -1,14 +1,8 @@
+const fs = require('fs')
+const path = require('path')
+
 const chalk = require('chalk')
 const puppeteer = require('puppeteer')
-
-const players = [
-  { name: 'Björn', url: 'https://www.dndbeyond.com/characters/48002358' },
-  { name: 'Einarr', url: 'https://www.dndbeyond.com/characters/43201577' },
-  { name: 'Gramdoul', url: 'https://www.dndbeyond.com/characters/95971' },
-  { name: 'Knuckles', url: 'https://www.dndbeyond.com/characters/37239100' },
-  { name: 'Malcon', url: 'https://www.dndbeyond.com/characters/48112517' },
-  { name: 'Searos', url: 'https://www.dndbeyond.com/characters/37246059' },
-]
 
 const getHP = async (browser, cookie, player) => {
   const page = await browser.newPage()
@@ -49,12 +43,29 @@ const getHP = async (browser, cookie, player) => {
   return { ...player, current, max, half }
 }
 
+const getPlayers = () => {
+  const filepath = path.join(__dirname, "players.csv")
+
+  if (!fs.existsSync(filepath)) {
+    console.log(chalk`{red players.csv missing from ${__dirname}, please add one}`)
+    process.exit(1)
+  }
+
+  const data = fs.readFileSync(filepath, 'utf8')
+  return data.split(/\r?\n/).filter(line => line).map(line => {
+    const [name, url] = line.split(',')
+    return {name, url}
+  })
+}
+
 ;(async () => {
   if (process.argv.length < 3) {
     console.log(chalk`{red Session cookie for dndbeyond.com missing}`)
     process.exit(1)
   }
   const cookie = process.argv.pop()
+
+  const players = getPlayers()
 
   const browser = await puppeteer.launch()
 
