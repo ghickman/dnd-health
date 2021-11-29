@@ -5,6 +5,7 @@
   "repository": "github:ghickman/dnd-health",
   "version": "1.0.0",
   "main": "script.js",
+  "type": "module",
   "scripts": {
     "format": "prettier-package-json --write ./package.json && prettier . --write",
     "start": "node script.js"

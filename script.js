@@ -1,5 +1,5 @@
-const chalk = require('chalk')
-const puppeteer = require('puppeteer')
+import chalk from 'chalk'
+import puppeteer from 'puppeteer'
 
 const players = [
   { name: 'Björn', url: 'https://www.dndbeyond.com/characters/48002358' },
@@ -51,7 +51,7 @@ const getHP = async (browser, cookie, player) => {
 
 ;(async () => {
   if (process.argv.length < 3) {
-    console.log(chalk`{red Session cookie for dndbeyond.com missing}`)
+    console.log(chalk.red('Session cookie for dndbeyond.com missing'))
     process.exit(1)
   }
   const cookie = process.argv.pop()
@@ -59,7 +59,7 @@ const getHP = async (browser, cookie, player) => {
   const browser = await puppeteer.launch()
 
   // get the HP from each Player's sheet
-  console.log(chalk`{grey Fetching data from dndbeyond.com...}`)
+  console.log(chalk.grey('Fetching data from dndbeyond.com...'))
   const results = await Promise.all(
     players.map((p) => getHP(browser, cookie, p))
   )
