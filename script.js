@@ -68,6 +68,7 @@ const getHP = async (browser, cookie, player) => {
   results.forEach((player) => {
     const name = player.name.padStart(8, ' ')
     const current = String(player.current).padStart(3, ' ')
+    const half = String(player.half).padStart(2, ' ')
     const max = String(player.max).padEnd(3, ' ')
 
     // Change current HP as it decreases
@@ -79,9 +80,13 @@ const getHP = async (browser, cookie, player) => {
       current_colour = chalk.red.bold
     }
 
-    const message = `${name}: ${current_colour(current)}/${chalk.green(
-      max
-    )} (${chalk.cyan(player.half)})`
+    const percentage = Math.round((player.current / player.max) * 100)
+
+    const message = `${name}: ${current_colour(current)}${chalk.gray(
+      '/'
+    )}${chalk.green(max)} ${chalk.gray('|')} ${chalk.cyan(half)} ${chalk.gray(
+      '|'
+    )} ${current_colour(percentage + '%')}`
     console.log(message)
   })
 
