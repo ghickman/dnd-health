@@ -49,6 +49,17 @@ const getHP = async (browser, cookie, player) => {
   return { ...player, current, max, half }
 }
 
+function get_current_colour(player) {
+  // Change current HP colouring as it decreases
+  if (player.current == player.half) {
+    return chalk.green
+  } else if (player.current < player.max && player.current > player.half) {
+    return chalk.magenta
+  } else {
+    return chalk.red.bold
+  }
+}
+
 ;(async () => {
   if (process.argv.length < 3) {
     console.log(chalk.red('Session cookie for dndbeyond.com missing'))
@@ -66,27 +77,22 @@ const getHP = async (browser, cookie, player) => {
 
   // write out name and hp, padded so the colons line up, obvs
   results.forEach((player) => {
+    const current_colour = get_current_colour(player)
+
+    // values
     const name = player.name.padStart(8, ' ')
-    const current = String(player.current).padStart(3, ' ')
-    const half = String(player.half).padStart(2, ' ')
-    const max = String(player.max).padEnd(3, ' ')
+    const current = current_colour(String(player.current).padStart(3, ' '))
+    const half = chalk.cyan(String(player.half).padStart(2, ' '))
+    const max = chalk.green(String(player.max).padEnd(3, ' '))
+    const percent = current_colour(
+      Math.round((player.current / player.max) * 100) + '%'
+    )
 
-    // Change current HP as it decreases
-    let current_colour = chalk.green
-    if (player.current < player.max && player.current > player.half) {
-      current_colour = chalk.magenta
-    }
-    if (player.current <= player.half) {
-      current_colour = chalk.red.bold
-    }
+    // punctuation
+    const slash = chalk.gray('/')
+    const bar = chalk.gray('|')
 
-    const percentage = Math.round((player.current / player.max) * 100)
-
-    const message = `${name}: ${current_colour(current)}${chalk.gray(
-      '/'
-    )}${chalk.green(max)} ${chalk.gray('|')} ${chalk.cyan(half)} ${chalk.gray(
-      '|'
-    )} ${current_colour(percentage + '%')}`
+    const message = `${name}: ${current}${slash}${max} ${bar} ${half} ${bar} ${percent}`
     console.log(message)
   })
 
