@@ -51,7 +51,7 @@ const getHP = async (browser, cookie, player) => {
 
 function get_current_colour(player) {
   // Change current HP colouring as it decreases
-  if (player.current == player.half) {
+  if (player.current >= player.half) {
     return chalk.green
   } else if (player.current < player.max && player.current > player.half) {
     return chalk.magenta
