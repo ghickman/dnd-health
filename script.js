@@ -63,7 +63,7 @@ function get_current_colour(player) {
 function get_percent(player) {
   // Current health percentage
   const value = Math.round((player.current / player.max) * 100)
-  return `${value || '-'}%`
+  return `${value || '-'}%`.padStart(4, ' ')
 }
 
 ;(async () => {
