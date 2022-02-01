@@ -60,6 +60,12 @@ function get_current_colour(player) {
   }
 }
 
+function get_percent(player) {
+  // Current health percentage
+  const value = Math.round((player.current / player.max) * 100)
+  return `${value || '-'}%`
+}
+
 ;(async () => {
   if (process.argv.length < 3) {
     console.log(chalk.red('Session cookie for dndbeyond.com missing'))
@@ -84,9 +90,7 @@ function get_current_colour(player) {
     const current = current_colour(String(player.current).padStart(3, ' '))
     const half = chalk.cyan(String(player.half).padStart(2, ' '))
     const max = chalk.green(String(player.max).padEnd(3, ' '))
-    const percent = current_colour(
-      Math.round((player.current / player.max) * 100) + '%'
-    )
+    const percent = current_colour(get_percent(player))
 
     // punctuation
     const slash = chalk.gray('/')
