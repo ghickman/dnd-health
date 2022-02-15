@@ -96,7 +96,12 @@ function get_percent(player) {
     const slash = chalk.gray('/')
     const bar = chalk.gray('|')
 
-    const message = `${name}: ${current}${slash}${max} ${bar} ${half} ${bar} ${percent}`
+    const columns = [
+      `${name}: ${current}${slash}${max}`,
+      `${half}`,
+      `${percent}`,
+    ]
+    const message = columns.join(` ${bar} `)
     console.log(message)
   })
 
