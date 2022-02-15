@@ -66,6 +66,16 @@ function get_percent(player) {
   return `${value || '-'}%`.padStart(4, ' ')
 }
 
+function get_diff(player) {
+  // The difference between current when it's less than half
+  if (player.current >= player.half) {
+    return ''
+  } else {
+    const diff = player.half - player.current
+    return `(${diff})`.padStart(4, ' ')
+  }
+}
+
 ;(async () => {
   if (process.argv.length < 3) {
     console.log(chalk.red('Session cookie for dndbeyond.com missing'))
@@ -89,6 +99,7 @@ function get_percent(player) {
     const name = player.name.padStart(8, ' ')
     const current = current_colour(String(player.current).padStart(3, ' '))
     const half = chalk.cyan(String(player.half).padStart(2, ' '))
+    const diff = chalk.cyan(get_diff(player))
     const max = chalk.green(String(player.max).padEnd(3, ' '))
     const percent = current_colour(get_percent(player))
 
@@ -99,7 +110,7 @@ function get_percent(player) {
     const columns = [
       `${name}: ${current}${slash}${max}`,
       `${percent}`,
-      `${half}`,
+      `${half} ${diff}`,
     ]
     const message = columns.join(` ${bar} `)
     console.log(message)
