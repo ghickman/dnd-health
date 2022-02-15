@@ -98,8 +98,8 @@ function get_percent(player) {
 
     const columns = [
       `${name}: ${current}${slash}${max}`,
-      `${half}`,
       `${percent}`,
+      `${half}`,
     ]
     const message = columns.join(` ${bar} `)
     console.log(message)
