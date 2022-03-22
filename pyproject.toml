@@ -1,0 +1,53 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "dnd-health"
+description = ""
+version = "1+local"
+readme = "README.md"
+authors = [{name = "George Hickman", email = "george@ghickman.co.uk"}]
+requires-python = ">=3.10"
+dependencies = [
+  "playwright",
+  "rich",
+]
+
+[project.scripts]
+health = "health.__main__:main"
+
+[tool.black]
+exclude = '''
+(
+  /(
+      \.git         # exclude a few common directories
+    | \.direnv
+    | \.github
+    | \.pytest_cache
+    | \.venv
+    | htmlcov
+    | venv
+  )/
+)
+'''
+
+[tool.coverage.run]
+branch = true
+omit = [".direnv/*", ".venv/*"]
+
+[tool.coverage.report]
+fail_under = 100
+skip_covered = true
+
+[tool.coverage.html]
+
+[tool.flit.module]
+name = "health"
+
+[tool.isort]
+profile = "black"
+lines_after_imports = 2
+skip_glob = [".direnv", "venv", ".venv"]
+
+[tool.pytest.ini_options]
