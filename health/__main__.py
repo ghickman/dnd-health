@@ -16,6 +16,7 @@ players = [
     {"name": "Gramdoul", "url": "https://www.dndbeyond.com/characters/95971"},
     {"name": "Knuckles", "url": "https://www.dndbeyond.com/characters/37239100"},
     {"name": "Malcon", "url": "https://www.dndbeyond.com/characters/48112517"},
+    {"name": "Rickard", "url": "https://www.dndbeyond.com/characters/79491637"},
     {"name": "Searos", "url": "https://www.dndbeyond.com/characters/37246059"},
 ]
 
