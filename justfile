@@ -56,6 +56,7 @@ prodenv: requirements-prod
     test requirements.prod.txt -nt $VIRTUAL_ENV/.prod || exit 0
 
     $PIP install -r requirements.prod.txt
+    $BIN/playwright install
     touch $VIRTUAL_ENV/.prod
 
 
