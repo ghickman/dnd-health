@@ -77,6 +77,6 @@ if __name__ == "__main__":
     cookie_value = sys.argv[0] if len(sys.argv) > 1 else ""
 
     try:
-        asyncio.run(main(cookie_value))
+        asyncio.run(main(cookie_value), debug=True)
     except KeyboardInterrupt:
         sys.exit()
