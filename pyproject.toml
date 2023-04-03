@@ -51,3 +51,32 @@ lines_after_imports = 2
 skip_glob = [".direnv", "venv", ".venv"]
 
 [tool.pytest.ini_options]
+
+[tool.ruff]
+exclude = [
+  ".coverage",
+  ".direnv",
+  ".git",
+  ".github",
+  ".pytest_cache/",
+  ".ruff_cache",
+  ".venv",
+  "__pycache__",
+  "htmlcov",
+]
+extend-ignore = [
+  "E501",
+  "E741",
+]
+line-length = 88
+extend-select = [
+  "A",  # flake8-builtins
+  "I",  # isort
+  "INP",  # flake8-no-pep420
+  "ISC",  # flake8-implicit-str-concat
+  "UP",  # pyupgrade
+  "W",  # pycodestyle warning
+]
+
+[tool.ruff.isort]
+lines-after-imports = 2
