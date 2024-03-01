@@ -15,6 +15,6 @@ jobs:
           python-version: "3.11"
           cache: "pip"
           cache-dependency-path: requirements.*.txt
-      - uses: extractions/setup-just@v1
+      - uses: extractions/setup-just@v2
       - name: Check formatting, linting and import sorting
         run: just check
