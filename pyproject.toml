@@ -53,11 +53,13 @@ exclude = [
   "__pycache__",
   "htmlcov",
 ]
+line-length = 88
+
+[tool.ruff.lint]
 extend-ignore = [
   "E501",
   "E741",
 ]
-line-length = 88
 extend-select = [
   "A",  # flake8-builtins
   "I",  # isort
@@ -67,5 +69,5 @@ extend-select = [
   "W",  # pycodestyle warning
 ]
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 lines-after-imports = 2

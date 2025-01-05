@@ -27,7 +27,7 @@ check: black ruff
 # fix formatting and import sort ordering
 fix:
     uv run black .
-    uv run ruff --fix .
+    uv run ruff check --fix .
 
 # Run the dev project
 run *args:
