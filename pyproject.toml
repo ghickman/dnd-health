@@ -14,27 +14,28 @@ dependencies = [
   "rich==12.0.0",
 ]
 
-[dependency-groups]
-dev = [
-    "black==24.10.0",
-    "coverage==7.6.1",
-    "ipdb==0.13.13",
-    "pytest==8.3.4",
-    "ruff==0.8.4",
-]
-
 [project.scripts]
 health = "health.__main__:main"
 
-[tool.coverage.run]
-branch = true
-omit = [".direnv/*", ".venv/*"]
+[dependency-groups]
+dev = [
+  "black==24.10.0",
+  "coverage==7.6.1",
+  "ipdb==0.13.13",
+  "pytest==8.3.4",
+  "ruff==0.8.4",
+  "toml-sort>=0.24.2",
+]
+
+[tool.coverage.html]
 
 [tool.coverage.report]
 fail_under = 100
 skip_covered = true
 
-[tool.coverage.html]
+[tool.coverage.run]
+branch = true
+omit = [".direnv/*", ".venv/*"]
 
 [tool.flit.module]
 name = "health"
@@ -71,3 +72,11 @@ extend-select = [
 
 [tool.ruff.lint.isort]
 lines-after-imports = 2
+
+[tool.tomlsort]
+spaces_before_inline_comment = 2
+trailing_comma_inline_array = true
+sort_first = [
+  "build-system",
+  "project",
+]

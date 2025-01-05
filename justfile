@@ -18,12 +18,17 @@ black *args=".":
 ruff *args=".":
     uv run ruff check {{ args }}
 
+toml-sort *args:
+    uv run toml-sort {{ args }} pyproject.toml
+
 check: black ruff
+    {{ just_executable() }} toml-sort --check
 
 # fix formatting and import sort ordering
 fix:
     uv run black .
     uv run ruff check --fix .
+    {{ just_executable() }} toml-sort --in-place
     just --fmt --unstable --justfile justfile
 
 # Run the dev project
