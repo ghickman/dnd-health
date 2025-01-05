@@ -35,7 +35,7 @@ skip_covered = true
 
 [tool.coverage.run]
 branch = true
-omit = [".direnv/*", ".venv/*"]
+source = ["src/"]
 
 [tool.flit.module]
 name = "health"
