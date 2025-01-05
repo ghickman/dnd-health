@@ -54,11 +54,6 @@ skip_covered = true
 [tool.flit.module]
 name = "health"
 
-[tool.isort]
-profile = "black"
-lines_after_imports = 2
-skip_glob = [".direnv", "venv", ".venv"]
-
 [tool.pytest.ini_options]
 
 [tool.ruff]
