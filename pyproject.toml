@@ -26,21 +26,6 @@ dev = [
 [project.scripts]
 health = "health.__main__:main"
 
-[tool.black]
-exclude = '''
-(
-  /(
-      \.git         # exclude a few common directories
-    | \.direnv
-    | \.github
-    | \.pytest_cache
-    | \.venv
-    | htmlcov
-    | venv
-  )/
-)
-'''
-
 [tool.coverage.run]
 branch = true
 omit = [".direnv/*", ".venv/*"]
