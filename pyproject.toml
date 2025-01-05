@@ -27,6 +27,13 @@ dev = [
   "toml-sort>=0.24.2",
 ]
 
+[tool.black]
+extend-exclude = '''
+(
+  .ruff_cache
+)
+'''
+
 [tool.coverage.html]
 
 [tool.coverage.report]
