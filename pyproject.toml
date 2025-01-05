@@ -43,14 +43,8 @@ name = "health"
 [tool.pytest.ini_options]
 
 [tool.ruff]
-exclude = [
+extend-exclude = [
   ".coverage",
-  ".direnv",
-  ".git",
-  ".github",
-  ".pytest_cache/",
-  ".ruff_cache",
-  ".venv",
   "__pycache__",
   "htmlcov",
 ]
