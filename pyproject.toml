@@ -10,7 +10,7 @@ readme = "README.md"
 authors = [{name = "George Hickman", email = "george@ghickman.co.uk"}]
 requires-python = ">=3.11"
 dependencies = [
-  "playwright==1.30.0",
+  "playwright==1.49.1",
   "rich==13.9.4",
 ]
 
