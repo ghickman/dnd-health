@@ -11,7 +11,7 @@ authors = [{name = "George Hickman", email = "george@ghickman.co.uk"}]
 requires-python = ">=3.11"
 dependencies = [
   "playwright==1.30.0",
-  "rich==12.0.0",
+  "rich==13.9.4",
 ]
 
 [project.scripts]
